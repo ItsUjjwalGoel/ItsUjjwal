@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Grain from '../assets/Grain.gif'
 import myimg from '../assets/Ujjwal.jpg'
 import './AboutMe.css'
-import Navbar from './navbar.jsx'
+import Navbar from './Navbar.jsx'
 const Lastpage = lazy(() => import('./FootNotes.jsx'))
 
 gsap.registerPlugin(ScrollTrigger)

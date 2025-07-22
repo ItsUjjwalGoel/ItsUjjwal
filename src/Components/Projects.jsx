@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import Grain from '../assets/Grain.gif';
 import Lastpage from './FootNotes.jsx'
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 const projects = [
   [
     {

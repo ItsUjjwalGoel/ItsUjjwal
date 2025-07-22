@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy } from 'react';
 import emailjs from 'emailjs-com';
 import Grain from '../assets/Grain.gif';
-import Navbar from './navbar';
+import Navbar from './Navbar.jsx';
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_zia1ygm';
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_iztl5p6';
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'fMac4Vr49ozPkU8XH';

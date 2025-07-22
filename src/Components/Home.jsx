@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Grain from '../assets/Grain.gif';
 import Image from '../assets/myedit1.jpg';
 import { useTheme } from '../Context/ThemeContext';
-import Navbar from './navbar';
+import Navbar from './Navbar.jsx';
 const WhatIDo = lazy(() => import('./WhatIDo.jsx'));
 const Projects = lazy(() => import('./HomeProject.jsx'));
 const AboutMe = lazy(() => import('./Info.jsx'));
