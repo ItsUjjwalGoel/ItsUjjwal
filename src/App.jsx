@@ -1,10 +1,10 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-const home = lazy(() => import('./Components/Home'));
-const contact = lazy(() => import('./Components/Contact'));
-const info = lazy(() => import('./Components/AboutMe'));
-const projects = lazy(() => import('./Components/Projects'));
-const preloader = lazy(() => import('./Components/Preloader'));
+const Home = lazy(() => import('./Components/Home'));
+const Contact = lazy(() => import('./Components/Contact'));
+const Info = lazy(() => import('./Components/AboutMe'));
+const Projects = lazy(() => import('./Components/Projects'));
+const Preloader = lazy(() => import('./Components/Preloader'));
 
 
 function App() {
@@ -29,16 +29,16 @@ function App() {
     }
   }, [loading]);
 
-  if (loading) return <preloader />;
+  if (loading) return <Preloader />;
 
   return (
     <Suspense fallback={<div className="text-white text-center pt-20">Loading...</div>}>
       <Routes>
       
-        <Route path="/" element={<home />} />
-        <Route path="/Contact" element={<contact />} />
-        <Route path="/AboutMe" element={<info />} />
-        <Route path="/Projects" element={<projects />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/AboutMe" element={<Info />} />
+        <Route path="/Projects" element={<Projects />} />
 
       </Routes>
     </Suspense>
