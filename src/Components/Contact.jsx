@@ -5,7 +5,7 @@ import Navbar from './navbar';
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_zia1ygm';
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_iztl5p6';
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'fMac4Vr49ozPkU8XH';
-const LastPage = lazy(() => import('./FootNotes'));
+const LastPage = lazy(() => import('./FootNotes.jsx'));
 function Contact() {
 
     const [animationdone, Setanimationdone] = useState(false)

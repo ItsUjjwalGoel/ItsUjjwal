@@ -5,10 +5,10 @@ import Grain from '../assets/Grain.gif';
 import Image from '../assets/myedit1.jpg';
 import { useTheme } from '../Context/ThemeContext';
 import Navbar from './navbar';
-const WhatIDo = lazy(() => import('./WhatIDo'));
-const Projects = lazy(() => import('./HomeProject'));
-const AboutMe = lazy(() => import('./Info'));
-const LastPage = lazy(() => import('./FootNotes'));
+const WhatIDo = lazy(() => import('./WhatIDo.jsx'));
+const Projects = lazy(() => import('./HomeProject.jsx'));
+const AboutMe = lazy(() => import('./Info.jsx'));
+const LastPage = lazy(() => import('./FootNotes.jsx'));
 gsap.registerPlugin(ScrollTrigger);
 function Home() {
   const { currentTheme } = useTheme();
