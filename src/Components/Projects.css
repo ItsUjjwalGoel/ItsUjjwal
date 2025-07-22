@@ -1,0 +1,75 @@
+.card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before,
+.card-border {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 500ms;
+    pointer-events: none;
+}
+
+.card::before {
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+            rgba(255, 255, 255, 0.06),
+            transparent 40%);
+    z-index: 3;
+}
+
+.card-border {
+    background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y),
+            rgba(236, 236, 236, 0.06),
+            transparent 40%);
+    z-index: 1;
+}
+
+.card:hover .card-border {
+    opacity: 1;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-content {
+    background-color: rgba(23, 23, 23);
+    border-radius: inherit;
+    margin: 2px;
+    height: calc(100% - 4px);
+    width: calc(100% - 4px);
+    z-index: 2;
+    position: relative;
+}
+
+.grain-layer {
+    background-size: cover;
+    background-repeat: repeat;
+}
+.glow-line {
+  position: relative;
+}
+
+.glow-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 40px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(1,255,168,0.4) 0%,
+    rgba(1,255,168,0.15) 40%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: -1;
+}

@@ -1,0 +1,214 @@
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from '../assets/Image01.jpg';
+import Grain from '../assets/Grain.gif';
+
+gsap.registerPlugin(ScrollTrigger);
+
+function Home() {
+  const heroRef = useRef(null);
+  const imageRef = useRef(null);
+  const textRef = useRef(null);
+  const grainRef = useRef(null);
+
+  const [width, setWidth] = useState(14);
+  const [height, setHeight] = useState(14);
+  const [bg, setBg] = useState('rgb(1, 255, 168)');
+  const [isHovered, setIsHovered] = useState(false);
+  const [top, setTop] = useState(0);
+  const [border, setBorder] = useState(0);
+
+  const handlemousein = () => {
+    setIsHovered(true);
+    setBg('rgb(1, 255, 168,0.08)');
+    setWidth(125);
+    setHeight(30);
+    setTop(-8);
+    setBorder(1);
+  };
+
+  const handlemouseout = () => {
+    setIsHovered(false);
+    setBg('rgb(1, 255, 168)');
+    setWidth(14);
+    setHeight(14);
+    setTop(0);
+    setBorder(0);
+  };
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '+=250%',
+          scrub: true,
+        },
+      }).to(imageRef.current, {
+        scaleY: 0.75,
+        scaleX: 0.5,
+        ease: 'none',
+        width: '60vw',
+        borderRadius: '40px',
+        right: '5vw',
+      });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '+=250%',
+          scrub: true,
+        },
+      }).to(grainRef.current, {
+        scaleY: 0.75,
+        scaleX: 0.5,
+        ease: 'none',
+        width: '60vw',
+        borderRadius: '40px',
+        right: '4vw',
+      });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '+=300%',
+          scrub: true,
+          pin: true,
+        },
+      }).to(textRef.current, {
+        y: -30,
+        ease: 'none',
+      });
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className="w-full bg-black text-white overflow-hidden">
+      {/* Navbar */}
+      <div className="fixed top-0 left-0 w-full z-50 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-md z-0" />
+        <div
+          className="absolute inset-0 -z-0"
+          style={{
+            backgroundImage: `url(${Grain})`,
+            backgroundBlendMode: 'overlay',
+            opacity: 0.03,
+            backgroundAttachment: 'scroll',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'repeat',
+          }}
+        />
+        <div className="relative z-10 flex justify-between items-center px-6 py-4">
+          <div className="text-xl tracking-wide font-medium text-white antialiased">
+            UJJWAL
+          </div>
+          <button className="relative group focus:outline-none">
+            <div className="relative flex items-center justify-center w-[50px] h-[50px] transition-all">
+              <div className="flex flex-col justify-between w-[20px] h-[20px] relative overflow-hidden">
+                <div className="bg-white/60 h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:translate-x-10 backdrop-blur-sm"></div>
+                <div className="bg-white/60 h-[2px] w-7 rounded transform transition-all duration-300 delay-75 group-focus:translate-x-10 backdrop-blur-sm"></div>
+                <div className="bg-white/60 h-[2px] w-7 transform transition-all duration-300 origin-left delay-150 group-focus:translate-x-10 backdrop-blur-sm"></div>
+              </div>
+              <div className="absolute top-1/2 left-0 flex items-center justify-between w-0 group-focus:w-12 transform -translate-y-1/2 translate-x-[-40px] group-focus:translate-x-0 transition-all duration-500">
+                <div className="bg-white/60 h-[2px] w-5 transform transition-all duration-500 translate-x-4 rotate-0 delay-300 group-focus:rotate-45 backdrop-blur-sm"></div>
+                <div className="bg-white/60 h-[2px] w-5 transform transition-all duration-500 -translate-x-3 rotate-0 delay-300 group-focus:-rotate-45 backdrop-blur-sm"></div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section ref={heroRef} className="relative h-[300vh] overflow-hidden bg-transparent backdrop-blur-md">
+        <div className="sticky top-0 right-0 h-screen w-lvw overflow-hidden pointer-events-none">
+          <img
+            ref={imageRef}
+            src={Image}
+            alt="Hero"
+            className="absolute top-0 right-0 w-lvw h-lvh object-cover"
+            style={{ transformOrigin: 'right' }}
+          />
+          <div
+            ref={grainRef}
+            className="absolute top-0 right-0 w-lvw h-lvh"
+            style={{
+              position: 'fixed',
+              backgroundImage: `url(${Grain})`,
+              backgroundBlendMode: 'overlay',
+              opacity: 0.035,
+              zIndex: 1,
+              backgroundAttachment: 'scroll',
+              backgroundPosition: '50% 50%',
+              backgroundRepeat: 'repeat',
+              transformOrigin: 'right',
+            }}
+          ></div>
+          <div
+            ref={textRef}
+            className="absolute top-0 left-0 h-full overflow-hidden flex items-center"
+            style={{ paddingLeft: '6rem', width: '50%' }}
+          >
+            <div>
+              <div className="absolute top-16 left-30"
+                onMouseEnter={handlemousein}
+                onMouseLeave={handlemouseout}>
+                <div className="mb-15 h-full relative top-20.5 -left-5 z-0"
+                  style={{ border: `${border}px solid rgb(1, 255, 168)`, borderRadius: 6 }}
+                >
+                  <svg
+                    width={width}
+                    height={height}
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ transition: 'all 0.5s ease', pointerEvents: 'auto' }}
+                  >
+                    <rect
+                      x="0"
+                      y="0"
+                      width={width}
+                      height={height}
+                      rx={isHovered ? 6 : height / 2}
+                      ry={isHovered ? 6 : height / 2}
+                      fill={bg}
+                      style={{
+                        transition: 'all 0.3s ease',
+                        pointerEvents: 'auto',
+                      }}
+                    />
+                  </svg>
+                </div>
+                <div className="relative text-xl mb-16 z-1"
+                  style={{
+                    top: `${top}px`, transition: 'all 0.5s ease',
+                    pointerEvents: 'auto',
+                  }}>
+                  CONTACT
+                </div>
+              </div>
+              <div className="text-7xl leading-tight font-bold">
+                Web design & custom Webflow development
+              </div>
+              <div className="pt-24 pr-20 text-2xl leading-snug">
+                Designer & Webflow expert helping you build beautiful and scalable website experiences
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Page Content */}
+      <div className="min-h-lvh px-10 pt-20">
+        <h1 className="text-4xl font-semibold">Page Content</h1>
+        <p className="text-xl mt-4">
+          Scroll down to explore the rest of the page after the hero animation completes.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default Home;

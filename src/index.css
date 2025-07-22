@@ -1,0 +1,77 @@
+@import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  -webkit-overflow-scrolling: touch;
+}
+@layer utilities {
+  .font-ibm {
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+  .ibm-plex-sans {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+
+  }
+
+  .monoton-regular {
+    font-family: "Monoton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .viaoda-libre-regular {
+    font-family: "Viaoda Libre", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .cormorant-garamond {
+    font-family: "Cormorant Garamond", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+
+  .outfit {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+}
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #333 #000000;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #922424;
+  border-radius: 10px;
+  border: 2px solid #000000;
+
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
