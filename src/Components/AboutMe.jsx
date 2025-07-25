@@ -15,6 +15,9 @@ function Info() {
     const aboutTitleRef = useRef(null)
     const animationContextRef = useRef(null)
 
+    const gridLinesRef = useRef([])
+    const runnersRef = useRef([])
+
     const preventElasticScroll = useCallback((e) => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop
         const scrollHeight = document.documentElement.scrollHeight
@@ -36,6 +39,14 @@ function Info() {
 
     const navigateHome = useCallback(() => {
         window.location.href = '/'
+    }, [])
+
+    const addGridLineRef = useCallback((el, i) => {
+        if (el) gridLinesRef.current[i] = el
+    }, [])
+
+    const addRunnerRef = useCallback((el, i) => {
+        if (el) runnersRef.current[i] = el
     }, [])
 
     useEffect(() => {
@@ -82,6 +93,36 @@ function Info() {
             }
         })
 
+        const animateRunners = () => {
+            runnersRef.current.forEach((runner) => {
+                if (!runner) return;
+                gsap.set(runner, {
+                    top: 'auto',
+                    bottom: -100,
+                    opacity: 1,
+                });
+                gsap.to(runner, {
+                    top: 0,
+                    bottom: 'auto',
+                    opacity: 0,
+                    duration: 3,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        gsap.set(runner, {
+                            top: 'auto',
+                            bottom: -100,
+                            opacity: 1,
+                        });
+                    },
+                });
+            });
+        };
+
+
+
+        const interval = setInterval(animateRunners, 8000)
+        animateRunners() 
+
         const wheelOptions = { passive: false }
         const touchOptions = { passive: false }
 
@@ -95,12 +136,11 @@ function Info() {
         document.documentElement.style.overscrollBehavior = 'none'
 
         return () => {
+            clearInterval(interval)
             document.removeEventListener('wheel', preventElasticScroll, wheelOptions)
             document.removeEventListener('touchmove', preventElasticScroll, touchOptions)
-
             document.body.style.overscrollBehavior = originalBodyStyle
             document.documentElement.style.overscrollBehavior = originalDocumentStyle
-
             if (animationContextRef.current) {
                 animationContextRef.current.revert()
             }
@@ -111,14 +151,32 @@ function Info() {
     const GridLines = () => (
         <div className='fixed z-1 xl:gap-65 gap-45 flex w-11/12 justify-center overflow-hidden'>
             {Array.from({ length: 6 }, (_, i) => (
-                <div
-                    key={i}
-                    className='w-[2px] h-lvh bg-gradient-to-t from-[rgba(255,255,255,0.1)] to-[rgba(40,40,40,0.1)]'
-                />
+                <div key={i} className='relative w-[2px] h-lvh overflow-hidden'>
+                    <div
+                        ref={el => addGridLineRef(el, i)}
+                        className='absolute top-0 left-0 w-full h-full'
+                        style={{
+                            '--from-color': 'rgba(255,255,255,0.1)',
+                            '--to-color': 'rgba(40,40,40,0.1)',
+                            backgroundImage: 'linear-gradient(to top, var(--from-color), var(--to-color))'
+                        }}
+                    />
+                    <div
+                        ref={el => addRunnerRef(el, i)}
+                        className='absolute left-0 w-full h-20  rounded-full'
+                        style={{
+                            '--from-color': 'rgba(255,255,255,0.05)',
+                            '--to-color': 'rgba(40,40,40,0.8)',
+                            backgroundImage: 'linear-gradient(to top, var(--from-color), var(--to-color))',
+                            backgroundSize: '100% 200%',
+                            animation: 'gradientFlow 8s linear infinite'
+                        }}
+
+                    />
+                </div>
             ))}
         </div>
     )
-
     const ExternalLink = ({ href, children, className = '' }) => (
         <a
             href={href}
@@ -208,7 +266,7 @@ function Info() {
                             <div ref={addToRefs} className='mt-105 xl:ml-71 ml-48 z-0 text-[#e8e8e3] text-[42px] viaoda-libre-regular'>Achievements</div>
                         </div>
                         <div ref={addToRefs} className='xl:ml-94 ml-63 mt-5 text-[#e8e8e3] text-xl ibm-plex-sans'>TCS CodeVita Season 12 803 Rank</div>
-                        <div ref={addToRefs} className='xl:ml-94 ml-63  mt-2 text-[#e8e8e3] text-xl ibm-plex-sans'>ATL Marathon, ISRO 2022 12th Rank</div>
+                        <div ref={addToRefs} className='xl:ml-94 ml-63   text-[#e8e8e3] text-xl ibm-plex-sans'>ATL Marathon, ISRO 2022 12th Rank</div>
                     </section>
 
                     <ExternalLink href="https://leetcode.com/u/POAANddjT0/" className='xl:ml-94 ml-63 '>
@@ -223,8 +281,8 @@ function Info() {
                         <ExternalLink href="https://codeforces.com/profile/ujjwalgoel104" className='xl:ml-94 ml-63 '>
                             Codeforces
                         </ExternalLink>
-                        <div ref={addToRefs} className='mt-105 xl:ml-194 ml-124 text-[#e8e8e3] text-xl ibm-plex-sans'>Apart from </div>
-                        <div ref={addToRefs} className='mt-0 xl:ml-184 ml-114 text-[#e8e8e3] text-xl ibm-plex-sans'>English & Hindi</div>
+                        <div ref={addToRefs} className='mt-105 xl:ml-205 ml-124 text-[#e8e8e3] text-xl ibm-plex-sans'>Skills</div>
+                        <div ref={addToRefs} className='mt-0 xl:ml-184 ml-114 text-[#e8e8e3] text-xl ibm-plex-sans'></div>
                         <div ref={addToRefs} className='-mt-20 xl:ml-288 ml-196 text-[#e8e8e3] xl:text-[42px] text-[30px] ibm-plex-sans'>Languages &</div>
                         <div ref={addToRefs} className='-mt-3 xl:ml-288  ml-196 text-[#e8e8e3] xl:text-[42px] text-[30px] viaoda-libre-regular'>Tools</div>
 
@@ -234,7 +292,7 @@ function Info() {
                             </div>
                         ))}
 
-                        <div ref={addToRefs} className='mt-90 xl:ml-7 ml-41 text-[#e8e8e3] text-xl ibm-plex-sans'>import</div>
+                        <div ref={addToRefs} className='mt-90 xl:ml-14 ml-41 text-[#e8e8e3] text-xl ibm-plex-sans'> &lt;&gt;</div>
                         <div ref={addToRefs} className='-mt-12 xl:ml-92 ml-105 text-[#e8e8e3] text-[42px] ibm-plex-sans'>Frameworks</div>
                         <div ref={addToRefs} className='-mt-3 xl:ml-92 ml-105  text-[#e8e8e3] text-[42px] viaoda-libre-regular'>& Libraries</div>
 

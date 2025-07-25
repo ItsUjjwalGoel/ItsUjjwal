@@ -111,7 +111,7 @@ function Home() {
       });
       if (containerRef.current && cardRefs.current.length === 4) {
         const stackOffset = 100;
-        const scrollOffset = 700;
+        const scrollOffset = 600;
 
         gsap.set(cardRefs.current[0], { y: '20vh' });
         gsap.set(cardRefs.current[1], { y: '100vh' });
@@ -137,7 +137,6 @@ function Home() {
           start: 'top top',
           end: `+=${scrollOffset * cardRefs.current.length}vh`,
           pin: true,
-          anticipatePin: 1,
           id: 'pin',
         });
       }

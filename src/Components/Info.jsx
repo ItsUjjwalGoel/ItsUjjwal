@@ -37,7 +37,7 @@ function AboutMe() {
                 <div className='max-w-4xl mx-auto px-8'>
                     <div className='flex justify-center'>
                         <div className='w-full'>
-                            <div className={`transform transition-all duration-1000 ease-out delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                            <div className={`transform transition-all duration-900 ease-out delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
 
                                 <div className='text-[#e8e8e3] space-y-6 text-xl leading-relaxed font-light text-center max-w-3xl mx-auto'>
                                     <p>
