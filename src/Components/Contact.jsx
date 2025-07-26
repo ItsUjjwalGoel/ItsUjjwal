@@ -9,6 +9,21 @@ const LastPage = lazy(() => import('./FootNotes.jsx'));
 function Contact() {
 
     const [animationdone, Setanimationdone] = useState(false)
+    const [hovertext, setHovertext] = useState(false);
+    const [hovertextsecond, setHovertextsecond] = useState(false);
+    const [hovertextthird, setHovertextthird] = useState(false);
+    const handlehover = () => {
+        setHovertext(!hovertext);
+    }
+    const handlehoversecond = () => {
+        setHovertextsecond(!hovertextsecond);
+    }
+    const handlehoverthird = () => {
+        setHovertextthird(!hovertextthird);
+    }
+
+
+
     useEffect(() => {
         Setanimationdone(true);
     })
@@ -327,8 +342,31 @@ function Contact() {
                                         OPEN TO NEW OPPORTUNITIES
                                     </div>
                                 </div>
-                                <div className='ibm-plex-sans mt-45 xl:text-6xl lg:text-5xl text-[#e8e8e3] font-light'>Get in touch</div>
 
+                                <div className='ibm-plex-sans mt-45 xl:text-6xl lg:text-5xl text-[#e8e8e3] font-light'>Get in touch</div>
+                                <div className='flex ml-3 gap-4 mt-4'>
+                                    <div className='flex flex-col'>
+                                        <a href='https://www.linkedin.com/in/its-ujjwal/' target='_blank' className={`text-[#c3c3c3] ibm-plex-sans font-light `}
+                                            onMouseEnter={handlehover}
+                                            onMouseLeave={handlehover}>LINKEDIN
+                                        </a>
+                                        <div className={`${hovertext ? 'w-17 h-0.5 bg-[rgba(1,255,168)]' : 'w-0 h-0'} transition-all duration-700 `}></div>
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <a href='https://github.com/ItsUjjwalGoel' target='_blank' className={`text-[#c3c3c3] ibm-plex-sans font-light `}
+                                            onMouseEnter={handlehoversecond}
+                                            onMouseLeave={handlehoversecond}>GITHUB
+                                        </a>
+                                        <div className={`${hovertextsecond ? 'w-14 h-0.5 bg-[rgba(1,255,168)]' : 'w-0 h-0'} transition-all duration-700 `}></div>
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <a href='https://leetcode.com/u/POAANddjT0/' target='_blank' className={`text-[#c3c3c3] ibm-plex-sans font-light `}
+                                            onMouseEnter={handlehoverthird}
+                                            onMouseLeave={handlehoverthird}>LEETCODE
+                                        </a>
+                                        <div className={`${hovertextthird ? 'w-18 h-0.5 bg-[rgba(1,255,168)]' : 'w-0 h-0'} transition-all duration-700 `}></div>
+                                    </div>
+                                </div>
                                 {status === 'SUCCESS' && (
                                     <div className="mt-8 p-4 bg-green-900/30 border border-green-500 rounded-lg transition-opacity duration-300">
                                         <p className="text-green-400 ibm-plex-sans font-extralight">Email sent successfully! I'll get back to you soon.</p>
